@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V体育 · 日常运动的温度与刻度</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fde6d2 0%, #fcd5b5 40%, #fad3c0 80%, #fce4d6 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .page-container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* 卡片通用 */
+        .card {
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -12px rgba(190, 120, 70, 0.18), 0 8px 20px -6px rgba(160, 100, 60, 0.08);
+            padding: 2.4rem 2.8rem;
+            margin-bottom: 2.8rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 28px 48px -14px rgba(170, 95, 50, 0.22);
+        }
+
+        /* hero */
+        .hero {
+            background: linear-gradient(135deg, #fde8d4 0%, #fad6bd 60%, #ffddd0 100%);
+            border-radius: 40px;
+            padding: 3.2rem 2.8rem;
+            margin-bottom: 2.8rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 280px;
+            height: 280px;
+            background: rgba(255, 215, 180, 0.25);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #4b2c1a;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(to right, #b46f3a, #d68d5a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #5b3c28;
+            max-width: 640px;
+            margin: 0 auto 1.4rem;
+            line-height: 1.6;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: rgba(255, 242, 232, 0.7);
+            backdrop-filter: blur(4px);
+            padding: 0.5rem 1.6rem;
+            border-radius: 60px;
+            font-size: 0.95rem;
+            color: #6f4a2e;
+            border: 1px solid #efd3bc;
+        }
+
+        /* 优势区 三列 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+        }
+
+        .feature-item {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 2rem 1.6rem;
+            box-shadow: 0 12px 28px -10px rgba(160, 100, 55, 0.10);
+            transition: all 0.2s;
+            border: 1px solid #f7e3d4;
+        }
+
+        .feature-item:hover {
+            border-color: #dba883;
+            box-shadow: 0 16px 32px -12px rgba(175, 105, 55, 0.18);
+        }
+
+        .feature-item h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #3f2a1b;
+            margin-bottom: 0.6rem;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #5c4231;
+            line-height: 1.55;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        /* 说明区 */
+        .explain-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.2rem;
+        }
+
+        .explain-main {
+            flex: 2;
+            min-width: 260px;
+        }
+
+        .explain-main h2 {
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: #3f2a1b;
+            margin-bottom: 1rem;
+            border-left: 6px solid #dba278;
+            padding-left: 1rem;
+        }
+
+        .explain-main p {
+            font-size: 1rem;
+            color: #4a3729;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .explain-side {
+            flex: 1.2;
+            min-width: 200px;
+            background: #faf3ec;
+            border-radius: 24px;
+            padding: 1.8rem 1.6rem;
+        }
+
+        .explain-side h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #3f2a1b;
+            margin-bottom: 0.8rem;
+        }
+
+        .explain-side ul {
+            list-style: none;
+        }
+
+        .explain-side li {
+            padding: 0.5rem 0;
+            color: #4f3a2b;
+            border-bottom: 1px dashed #edd7c8;
+            font-size: 0.95rem;
+        }
+
+        .explain-side li:last-child {
+            border-bottom: none;
+        }
+
+        /* FAQ 摘要 */
+        .faq-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem 2rem;
+        }
+
+        .faq-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f2e1d3;
+        }
+
+        .faq-item:last-child,
+        .faq-item:nth-last-child(2) {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: 500;
+            color: #3a281d;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .faq-question::before {
+            content: '▹';
+            color: #c48252;
+            font-size: 1.1rem;
+        }
+
+        .faq-answer {
+            color: #5f4837;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            padding-left: 1.2rem;
+        }
+
+        /* 底部链接 */
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-top: 2px solid #edd9ca;
+            margin-top: 0.6rem;
+        }
+
+        .footer-text {
+            font-size: 0.95rem;
+            color: #5c4233;
+        }
+
+        .footer-text a {
+            color: #a76231;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.2rem 0.1rem;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .footer-text a:hover {
+            border-bottom-color: #ba7c4f;
+        }
+
+        .footer-meta {
+            display: flex;
+            gap: 1.6rem;
+            font-size: 0.85rem;
+            color: #7d5f4b;
+        }
+
+        .footer-meta span {
+            cursor: default;
+        }
+
+        /* 响应式 */
+        @media (max-width: 860px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .faq-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 1.8rem 1.6rem;
+            }
+
+            .hero {
+                padding: 2.2rem 1.6rem;
+            }
+        }
+
+        @media (max-width: 580px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .explain-section {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-container">
+
+    <!-- hero 区 -->
+    <div class="hero">
+        <h1>运动里藏着的生活 <span>刻度</span></h1>
+        <p>不论晨跑还是傍晚散步，每次心率起伏都是日常的注脚。<br>V体育 想陪你一起记录这些扎实的节奏。</p>
+        <div class="tagline">🏃‍♂️ 让身体先动起来，感受自然流淌的活力</div>
+    </div>
+
+    <!-- 优势区 -->
+    <div class="card" style="padding-bottom: 1.2rem;">
+        <div class="features-grid">
+            <div class="feature-item">
+                <span class="feature-icon">⏱️</span>
+                <h3>随性的节奏</h3>
+                <p>不必刻意打卡，不卷时长与配速。活动、拉伸、哪怕五分钟的原地踏步，V体育 都帮你自然记录。</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">📊</span>
+                <h3>质朴的数据</h3>
+                <p>步数、心率区间、活动频次。不堆砌复杂图表，只留下对你有用的日常运动轨迹。</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🧘</span>
+                <h3>生活化场景</h3>
+                <p>通勤多走一站、午休时溜达一圈、陪孩子踢踢球。运动不必正襟危坐，融入日常才长久。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 说明区 + 侧边场景 -->
+    <div class="card">
+        <div class="explain-section">
+            <div class="explain-main">
+                <h2>从细微处，看见运动习惯</h2>
+                <p>很多时候我们不是不想动，而是缺少一个恰好合拍的提醒和回顾。<strong>V体育</strong> 关注的是那些被忽略的「微运动」瞬间——等车时踮踮脚、爬几层楼梯、饭后散步十分钟。把这些点滴连起来，就是属于你自己的活跃图谱。</p>
+                <p>没有一刀切的计划，也不鼓吹每天必须练多久。你可以根据自己的状态调整：今天累了就少动一点，精神好就多伸展一会儿。运动应该服务于生活，而不是反过来。</p>
+            </div>
+            <div class="explain-side">
+                <h3>适合这些日常</h3>
+                <ul>
+                    <li>🔄 办公室久坐后的肩颈放松</li>
+                    <li>🚶 下班路上提前一站下车步行</li>
+                    <li>🧹 做家务时顺便活动手脚</li>
+                    <li>🌳 周末公园里慢走或快走交替</li>
+                    <li>📱 跟着短时视频做几组拉伸</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要区 -->
+    <div class="card">
+        <h2 style="font-weight: 500; color: #3f2a1b; font-size: 1.5rem; margin-bottom: 1.2rem; border-left: 6px solid #dba278; padding-left: 1rem;">一些常见的小问题</h2>
+        <div class="faq-summary">
+            <div class="faq-item">
+                <div class="faq-question">需要严格按照计划运动吗？</div>
+                <div class="faq-answer">不必。V体育 更希望你按自己的身体感觉来，有弹性地活动，比强行完成计划更有意义。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">数据会不会很复杂？</div>
+                <div class="faq-answer">只呈现最关键的几个维度：活动时长、步数、心率区间。清爽直观，看一眼就明白。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">可以跟其他设备配合吗？</div>
+                <div class="faq-answer">支持主流穿戴设备与健康平台的数据同步，方便你统一查看自己的日常活动。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">如果今天完全不想动呢？</div>
+                <div class="faq-answer">那就休息。恢复也是运动习惯的一部分，V体育 不会给你任何压力。</div>
+            </div>
+        </div>
+        <p style="margin-top: 1.2rem; font-size: 0.9rem; color: #6b4f3b; border-top: 1px dashed #e7d3c2; padding-top: 1rem;">
+            更多细节与理念，可以到 <a href="https://index-vsports.com" style="color: #a76231; text-decoration: none; font-weight: 500;">V体育</a> 慢慢了解。我们始终相信，运动是生活的自然延伸。
+        </p>
+    </div>
+
+    <!-- 底部链接 -->
+    <div class="footer-links">
+        <div class="footer-text">
+            <a href="https://index-vsports.com">V体育</a> · 温和地记录，自在地活动
+        </div>
+        <div class="footer-meta">
+            <span>© 2025</span>
+            <span>关于日常运动的对话</span>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
